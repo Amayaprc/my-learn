@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prc.springbootshiro.dao.UserMapper">
+
+    <select id="testQuery" resultType="com.prc.springbootshiro.pojo.entity.User">
+        select userid,username,password,sex,address from user where userid = #{userid}
+    </select>
+
+    <select id="findByUserName" resultType="com.prc.springbootshiro.pojo.entity.User">
+        select userid,username,password,sex,address from user where username = #{userName}
+    </select>
+</mapper>

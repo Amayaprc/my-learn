@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.prc.springbootflowablenew.dao.FormDefineDao">
+
+    <insert id="createFormDefine" keyProperty="formdefId" useGeneratedKeys="true" parameterType="com.prc.springbootflowablenew.pojo.dto.FormDefineDto">
+        insert into form_define (formdef_name,formdef_remark,create_id,create_name,create_time,update_id,update_name,update_time)
+        values (#{formdefName},#{formdefRemark},#{createId},#{createName},now(),#{updateId},#{updateName},now())
+    </insert>
+
+    <insert id="createFormItem">
+        insert into form_item (formdef_id,formdef_item)
+        values (#{formdefId},#{formdefItem})
+    </insert>
+</mapper>

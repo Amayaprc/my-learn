@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/my-easyexcel/my-easyexcel.iml" filepath="$PROJECT_DIR$/my-easyexcel/my-easyexcel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-easypoi/my-easypoi.iml" filepath="$PROJECT_DIR$/my-easypoi/my-easypoi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-poi/my-poi.iml" filepath="$PROJECT_DIR$/my-poi/my-poi.iml" />
+    </modules>
+  </component>
+</project>

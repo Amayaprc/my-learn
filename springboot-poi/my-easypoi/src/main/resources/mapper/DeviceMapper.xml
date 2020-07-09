@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prc.myeasypoi.dao.DeviceDao">
+
+    <select id="findById" resultType="com.prc.myeasypoi.pojo.Device">
+        select deviceid as deviceId,device_name as deviceName,
+        device_type as deviceType,value,
+        date_format(create_time,'%Y-%m-%d %H:%i:%s') as createTime,
+        CASE isenable WHEN 0 THEN '否' WHEN 1 THEN '是' END as isenable
+        from device where deviceid in
+        <foreach collection="ids" open="(" close=")" separator=" , " item="value">
+            #{value}
+        </foreach>
+    </select>
+
+    <insert id="insertDevice">
+        insert into device (device_name,device_type,value,create_time,isenable)
+        value (#{deviceName},#{deviceType},#{value},#{createTime},#{isenable})
+    </insert>
+</mapper>

@@ -1,0 +1,18 @@
+{
+  "mappings": {
+    "properties": {
+      "name": {
+        "type": "text"
+      },
+      "age": {
+        "type": "long"
+      },
+	  "sex": {
+        "type": "text"
+      },
+      "birthday": {
+        "type": "date"
+      }
+    }
+  }
+}

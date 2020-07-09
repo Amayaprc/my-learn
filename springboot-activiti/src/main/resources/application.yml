@@ -1,0 +1,27 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    druid:
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      test-on-borrow: true
+      url: jdbc:mysql://192.168.157.158:3306/activiti
+      username: root
+      password: prc772926
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  activiti:
+    database-schema-update: true
+    check-process-definitions: true
+    process-definition-location-prefix: classpath:/processes/
+    history-level: full
+    #process-definition-location-suffixes:
+    #- **.bpmn
+    #- **.bpmn20.xml
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

@@ -1,0 +1,37 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: shiro
+  datasource:
+    druid:
+      url: jdbc:mysql://192.168.157.158:3306/shiro
+      username: root
+      password: prc772926
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      test-on-borrow: true
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  thymeleaf:
+    cache: false
+  redis:
+    database: 1
+    host: 192.168.157.158
+    port: 6379
+    password:
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+    timeout: 1000
+  resources:
+    static-locations: classpath:static/
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

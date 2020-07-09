@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prc.springbootsecuritydynamic.dao.RoleDao">
+
+    <select id="findRoleById" resultType="com.prc.springbootsecuritydynamic.pojo.Role">
+        select b.id,b.name,b.nameZh from user_role a LEFT JOIN role b ON a.rid = b.id
+        where a.uid = #{id}
+    </select>
+
+</mapper>

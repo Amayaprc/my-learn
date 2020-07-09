@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>success</title>
+</head>
+<body>
+<span th:text="'欢迎你,'+${username}"></span>
+<br>
+
+<!--使用标签前 -->
+<a href="/dog">Dog</a>
+<a href="/cat">Cat</a>
+<a href="/people">People</a>
+<hr>
+<a href="/add">新增</a>
+<a href="/delete">删除</a>
+<a href="/update">修改</a>
+<a href="/query">查询</a>
+<a href="/export">导出</a>
+
+<!--使用标签后 -->
+<!--<shiro:hasRole name="dog"><a href="/dog">Dog</a></shiro:hasRole>
+<shiro:hasRole name="cat"><a href="/cat">Cat</a></shiro:hasRole>
+<shiro:hasRole name="people"><a href="/people">People</a></shiro:hasRole>
+<hr>
+<shiro:hasPermission name="user:add"><a href="/add">新增</a></shiro:hasPermission>
+<shiro:hasPermission name="user:update"><a href="/update">修改</a></shiro:hasPermission>
+<shiro:hasPermission name="user:delete"><a href="/delete">删除</a></shiro:hasPermission>
+<shiro:hasPermission name="user:query"><a href="/query">查询</a></shiro:hasPermission>
+<shiro:hasPermission name="user:export"><a href="/export">导出</a></shiro:hasPermission>-->
+
+
+</body>
+</html>

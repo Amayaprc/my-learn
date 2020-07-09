@@ -1,0 +1,17 @@
+server:
+  port: 8081
+
+spring:
+  http:
+    encoding.charset: UTF-8
+  servlet:
+    multipart:
+      #上传单个文件最大值
+      max-file-size: 20MB
+      #上传文件总和最大值
+      max-request-size: 100MB
+
+file:
+  #请求url中的资源映射
+  resourceHandler: /download/**
+  path: download

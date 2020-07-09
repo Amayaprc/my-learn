@@ -1,0 +1,20 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    druid:
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      test-on-borrow: true
+    one:
+      url: jdbc:mysql://192.168.157.157:3306/xuexi
+      username: root
+      password: prc772926
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    two:
+      url: jdbc:mysql://192.168.157.158:3306/xuexi
+      username: root
+      password: prc772926
+      driver-class-name: com.mysql.cj.jdbc.Driver

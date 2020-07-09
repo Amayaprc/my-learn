@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/2.3.3/stomp.min.js"></script>
+</head>
+<body>
+<input type="button" id="connect" value="连接">
+<input type="button" id="disconnect" value="断开" disabled="disabled">
+<div id="chat" style="display: none">
+    <table>
+        <tr>
+            <td>选择单聊的用户:</td>
+            <td><input type="text" id="to"></td>
+        </tr>
+        <tr>
+            <td>请输入想发送的内容:</td>
+            <td><input type="text" id="content"></td>
+            <td><input type="button" id="send" value="发送"></td>
+        </tr>
+    </table>
+    <div id="conversation">
+        <p>正在单聊...</p>
+    </div>
+</div>
+</body>
+
+<script>
+    var stompClient = null;
+
+    $(function () {
+
+        $("#connect").click(function () {
+            connect();
+        });
+
+        $("#disconnect").click(function () {
+            if (stompClient != null){
+                stompClient.disconnect();
+            }
+            setConnected(false);
+        });
+
+        $("#send").click(function () {
+            stompClient.send("/app/chat",{},JSON.stringify({"to":$("#to").val(),"content":$("#content").val()}));
+        });
+    })
+
+    function connect() {
+        var socket = new SockJS("/chat");
+        stompClient = Stomp.over(socket);
+        stompClient.connect({},function (success) {
+            setConnected(true);
+            stompClient.subscribe("/user/queue/chat",function (msg) {
+                showGreeting(JSON.parse(msg.body));
+            });
+        });
+    }
+
+    function setConnected(flag) {
+        $("#connect").prop("disabled",flag);
+        $("#disconnect").prop("disabled",!flag);
+        if (flag){
+            $("#chat").show();
+        }else {
+            $("#chat").hide();
+        }
+    }
+
+    function showGreeting(msg) {
+        $("#conversation").append("<p>" + msg.from + ":" + msg.content + "</p>");
+    }
+</script>
+
+</html>

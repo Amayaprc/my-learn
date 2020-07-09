@@ -1,0 +1,25 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: elasticsearch
+  datasource:
+    druid:
+      url: jdbc:mysql://192.168.157.158:3306/elasticsearch
+      username: root
+      password: prc772926
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      test-on-borrow: true
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  elasticsearch:
+    jest:
+      uris: http://192.168.157.158:9200
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="springboot-aop" />
+        <module name="springboot-freemarker" />
+        <module name="springboot-jpa" />
+        <module name="springboot-jdbctemplate" />
+        <module name="springboot-thymeleaf" />
+        <module name="springboot-file" />
+        <module name="springboot-exception" />
+        <module name="springboot-mybatis" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="springboot-aop" target="1.8" />
+      <module name="springboot-exception" target="1.8" />
+      <module name="springboot-file" target="1.8" />
+      <module name="springboot-freemarker" target="1.8" />
+      <module name="springboot-jdbctemplate" target="1.8" />
+      <module name="springboot-jpa" target="1.8" />
+      <module name="springboot-mybatis" target="1.8" />
+      <module name="springboot-thymeleaf" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="springboot-aop" options="-parameters" />
+      <module name="springboot-exception" options="-parameters" />
+      <module name="springboot-file" options="-parameters" />
+      <module name="springboot-freemarker" options="-parameters" />
+      <module name="springboot-jdbctemplate" options="-parameters" />
+      <module name="springboot-jpa" options="-parameters" />
+      <module name="springboot-mybatis" options="-parameters" />
+      <module name="springboot-thymeleaf" options="-parameters" />
+    </option>
+  </component>
+</project>

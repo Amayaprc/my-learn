@@ -1,0 +1,10 @@
+server:
+  port: 8081
+
+spring:
+  freemarker:
+    template-loader-path: classpath:/templates
+    cache: false
+    content-type: text/html
+    suffix: .ftl
+    charset: UTF-8

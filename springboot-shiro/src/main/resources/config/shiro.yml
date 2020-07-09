@@ -1,0 +1,20 @@
+##动态权限配置文件
+#List<Map<String, String>>
+permission-config:
+  perms:
+    - url: /cat
+      permission: roles[cat]
+    - url: /dog
+      permission: roles[dog]
+    - url: /people
+      permission: roles[people]
+    - url: /add
+      permission: perms[user:add]
+    - url: /update
+      permission: perms[user:update]
+    - url: /delete
+      permission: perms[user:delete]
+    - url: /query
+      permission: perms[user:query]
+    - url: /export
+      permission: perms[user:export]

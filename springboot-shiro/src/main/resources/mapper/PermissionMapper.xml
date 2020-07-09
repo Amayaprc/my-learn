@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prc.springbootshiro.dao.PermissionMapper">
+
+    <select id="findPermission" resultType="java.lang.String">
+        select distinct a.percode
+        from permission a inner join role_permission b inner join user_role c
+        on a.perid = b.perid and b.roleid = c.roleid where c.userid = #{userid}
+    </select>
+</mapper>

@@ -1,0 +1,70 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: flowable-new
+  aop:
+    auto: true
+    proxy-target-class: true
+  security:
+    filter:
+      dispatcher-types: REQUEST,FORWARD,ASYNC
+  liquibase:
+    enabled: false
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+  datasource:
+    druid:
+      url: jdbc:mysql://192.168.157.158:3306/flowable?nullCatalogMeansCurrent=true&serverTimezone=Asia/Shanghai
+      username: root
+      password: prc772926
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      test-on-borrow: true
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml,classpath:/META-INF/modeler-mybatis-mappings/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  configuration-properties:
+    blobType: BLOB
+    boolValue: TRUE
+    prefix:
+
+flowable:
+  common:
+    app:
+      role-prefix:
+      idm-url: http://localhost:8081/idm
+  idm:
+    app:
+      admin:
+        user-id: admin
+        password: test
+        first-name: admin
+        last-name: admin
+  modeler:
+    app:
+      rest-enabled: true
+  rest:
+    app:
+      authentication-mode: verify-privilege
+  process:
+    definition-cache-limit: -1
+  async-executor-activate: false
+  check-process-definitions: false
+  database-schema-update: false
+  history-level: full
+  xml:
+    encoding: UTF-8
+  activity-font-name: \u5B8B\u4F53
+  label-font-name: u5B8B\u4F53
+  annotation-font-name: \u5B8B\u4F53
