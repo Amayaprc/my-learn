@@ -37,15 +37,9 @@
         </dependency>
 
         <dependency>
-            <groupId>io.searchbox</groupId>
-            <artifactId>jest</artifactId>
-            <version>6.3.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>net.hzbox.elasticsearch</groupId>
-            <artifactId>elasticsearch-querybuilder</artifactId>
-            <version>0.2.4-SNAPSHOT</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
         </dependency>
     </dependencies>
 
