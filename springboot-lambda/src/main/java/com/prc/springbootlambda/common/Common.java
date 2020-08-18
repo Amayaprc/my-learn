@@ -17,6 +17,7 @@ public class Common {
         Student student6 = new Student(6, "林动", "lindong", 18, "男", null);
         Student student7 = new Student(7, "司马懿", null, 22, "男", "浙江杭州");
         Student student8 = new Student(8, "王昭君", "wangzhaojun", 20, "女", null);
+        Student student9 = new Student(1, "张三", "zhangsan", 21, "男", "浙江杭州");
         studentList.add(student1);
         studentList.add(student2);
         studentList.add(student3);
@@ -25,6 +26,7 @@ public class Common {
         studentList.add(student6);
         studentList.add(student7);
         studentList.add(student8);
+        studentList.add(student9);
         return studentList;
     }
 

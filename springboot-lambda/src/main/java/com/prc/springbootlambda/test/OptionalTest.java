@@ -13,7 +13,7 @@ public class OptionalTest {
     /**
      * 初始化数据
      */
-    private static final Student student = Common.initData();
+    private static Student student = Common.initData();
 
     /**
      * Optional.empty: 获取空的Optional实例,抛出NoSuchElementException异常
