@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <!-- 引入配置文件 -->
+    <properties resource="application.yml"/>
+
+    <!-- 指定数据库驱动的jdbc驱动jar包的位置 -->
+    <classPathEntry location="E:/mymaven/myLocalRepository/mysql/mysql-connector-java/8.0.21/mysql-connector-java-8.0.21.jar"/>
+
+    <!-- context 是逆向工程的主要配置信息 -->
+    <!-- id：名称 -->
+    <!-- targetRuntime：设置生成的文件适用于那个 mybatis 版本 -->
+    <context id="default" targetRuntime="MyBatis3">
+        <!-- 数据库关键字冲突,自动处理 -->
+        <property name="autoDelimitKeywords" value="true"/>
+        <!-- 用反引号`包裹,默认是双引号" -->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- 此处是将Example改名为Criteria,当然想改成什么都行 -->
+        <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+            <property name="searchString" value="Example"/>
+            <property name="replaceString" value="Criteria"/>
+        </plugin>
+        <!-- 自动实现Serializable接口 -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
+        <!-- 创建class时，控制注释生成 -->
+        <commentGenerator>
+            <!-- 为true时，生成的代码上方没有注释 -->
+            <property name="suppressAllComments" value="true"/>
+            <!-- 为true时，生成的代码上方没有时间
+             <property name="suppressDate" value="true" /> -->
+        </commentGenerator>
+
+        <!-- 数据库连接 -->
+		<jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://192.168.157.158:3306/xuexi"
+			            userId="root"
+                        password="prc772926" />
+
+        <!-- 生成model的路径 -->
+        <!-- targetPackage：生成的实体类所在的包 -->
+        <!-- targetProject：生成的实体类所在的硬盘位置 -->
+        <javaModelGenerator targetPackage="com.prc.springbootmybatisgeneator.pojo.dto" targetProject="src/main/java/">
+            <!-- 是否允许子包 -->
+            <property name="enableSubPackages" value="true"/>
+            <!-- 是否对model添加构造函数 -->
+            <property name="constructorBased" value="true" />
+            <!-- 是否清理从数据库中查询出的字符串左右两边的空白字符 -->
+            <property name="trimStrings" value="true" />
+            <!-- 建立model对象是否不可改变,即生成的model对象不会有setter方法,只有构造方法 -->
+            <property name="immutable" value="false" />
+        </javaModelGenerator>
+
+        <!-- 生成SQL-XML的路径 -->
+        <!-- targetPackage：生成的mapper所在的包 -->
+        <!-- targetProject：生成的mapper所在的硬盘位置 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- 生成dao的路径 -->
+        <!-- targetPackage：生成的dao所在的包 -->
+        <!-- targetProject：生成的dao所在的硬盘位置 -->
+        <javaClientGenerator targetPackage="com.prc.springbootmybatisgeneator.dao" targetProject="src/main/java/" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--<table tableName="form_log" domainObjectName="FormLog">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>-->
+        <!--<table tableName="formdef_action" domainObjectName="FormdefAction">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride column="filters" typeHandler="net.hzbox.vj.formpro.typehandler.LinkFiltersTypeHandler" jdbcType="VARCHAR"/>
+            <columnOverride column="update_rules" typeHandler="net.hzbox.vj.formpro.typehandler.FieldActionRulesTypeHandler" jdbcType="VARCHAR"/>
+            <columnOverride column="insert_rules" typeHandler="net.hzbox.vj.formpro.typehandler.FieldActionRulesTypeHandler" jdbcType="VARCHAR"/>
+        </table>-->
+        <table tableName="device" domainObjectName="Device">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+	</context>
+</generatorConfiguration>
