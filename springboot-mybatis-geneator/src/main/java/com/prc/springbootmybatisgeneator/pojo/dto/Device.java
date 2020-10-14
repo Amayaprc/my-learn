@@ -1,5 +1,6 @@
 package com.prc.springbootmybatisgeneator.pojo.dto;
 
+import com.prc.springbootmybatisgeneator.mybatis.annotation.CreatedDate;
 import com.prc.springbootmybatisgeneator.pojo.vo.DeviceVo;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +20,7 @@ public class Device implements Serializable {
 
     private Double value;
 
+    @CreatedDate
     private Date createTime;
 
     private Boolean isenable;

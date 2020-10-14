@@ -26,7 +26,6 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public void insert(Device device) {
-        device.setCreateTime(new Date());
         deviceMapper.insertSelective(device);
     }
 
