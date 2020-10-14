@@ -9,6 +9,7 @@
       <arg column="value" javaType="java.lang.Double" jdbcType="DOUBLE" />
       <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="isenable" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="subsets" javaType="java.util.List" jdbcType="VARCHAR" typeHandler="com.prc.springbootmybatisgeneator.typehandler.DeviceTypeHandler" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -31,6 +32,25 @@
                   and ${criterion.condition}
                   <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.subsetsCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.prc.springbootmybatisgeneator.typehandler.DeviceTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.prc.springbootmybatisgeneator.typehandler.DeviceTypeHandler} and #{criterion.secondValue,typeHandler=com.prc.springbootmybatisgeneator.typehandler.DeviceTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=com.prc.springbootmybatisgeneator.typehandler.DeviceTypeHandler}
                   </foreach>
                 </when>
               </choose>
@@ -64,13 +84,32 @@
                 </when>
               </choose>
             </foreach>
+            <foreach collection="criteria.subsetsCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.prc.springbootmybatisgeneator.typehandler.DeviceTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.prc.springbootmybatisgeneator.typehandler.DeviceTypeHandler} and #{criterion.secondValue,typeHandler=com.prc.springbootmybatisgeneator.typehandler.DeviceTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=com.prc.springbootmybatisgeneator.typehandler.DeviceTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
           </trim>
         </if>
       </foreach>
     </where>
   </sql>
   <sql id="Base_Column_List">
-    deviceid, device_name, device_type, `value`, create_time, isenable
+    deviceid, device_name, device_type, `value`, create_time, isenable, subsets
   </sql>
   <select id="selectByExample" parameterType="com.prc.springbootmybatisgeneator.pojo.dto.DeviceCriteria" resultMap="BaseResultMap">
     select
@@ -103,19 +142,22 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.prc.springbootmybatisgeneator.pojo.dto.Device">
-    insert into device (deviceid, device_name, device_type, 
-      `value`, create_time, isenable
+    <selectKey keyProperty="deviceid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into device (device_name, device_type, `value`, 
+      create_time, isenable, subsets
       )
-    values (#{deviceid,jdbcType=INTEGER}, #{deviceName,jdbcType=VARCHAR}, #{deviceType,jdbcType=VARCHAR}, 
-      #{value,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}, #{isenable,jdbcType=BIT}
+    values (#{deviceName,jdbcType=VARCHAR}, #{deviceType,jdbcType=VARCHAR}, #{value,jdbcType=DOUBLE}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{isenable,jdbcType=BIT}, #{subsets,jdbcType=VARCHAR,typeHandler=com.prc.springbootmybatisgeneator.typehandler.DeviceTypeHandler}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.prc.springbootmybatisgeneator.pojo.dto.Device">
+    <selectKey keyProperty="deviceid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into device
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="deviceid != null">
-        deviceid,
-      </if>
       <if test="deviceName != null">
         device_name,
       </if>
@@ -131,11 +173,11 @@
       <if test="isenable != null">
         isenable,
       </if>
+      <if test="subsets != null">
+        subsets,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="deviceid != null">
-        #{deviceid,jdbcType=INTEGER},
-      </if>
       <if test="deviceName != null">
         #{deviceName,jdbcType=VARCHAR},
       </if>
@@ -150,6 +192,9 @@
       </if>
       <if test="isenable != null">
         #{isenable,jdbcType=BIT},
+      </if>
+      <if test="subsets != null">
+        #{subsets,jdbcType=VARCHAR,typeHandler=com.prc.springbootmybatisgeneator.typehandler.DeviceTypeHandler},
       </if>
     </trim>
   </insert>
@@ -180,6 +225,9 @@
       <if test="record.isenable != null">
         isenable = #{record.isenable,jdbcType=BIT},
       </if>
+      <if test="record.subsets != null">
+        subsets = #{record.subsets,jdbcType=VARCHAR,typeHandler=com.prc.springbootmybatisgeneator.typehandler.DeviceTypeHandler},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -192,7 +240,8 @@
       device_type = #{record.deviceType,jdbcType=VARCHAR},
       `value` = #{record.value,jdbcType=DOUBLE},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      isenable = #{record.isenable,jdbcType=BIT}
+      isenable = #{record.isenable,jdbcType=BIT},
+      subsets = #{record.subsets,jdbcType=VARCHAR,typeHandler=com.prc.springbootmybatisgeneator.typehandler.DeviceTypeHandler}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -215,6 +264,9 @@
       <if test="isenable != null">
         isenable = #{isenable,jdbcType=BIT},
       </if>
+      <if test="subsets != null">
+        subsets = #{subsets,jdbcType=VARCHAR,typeHandler=com.prc.springbootmybatisgeneator.typehandler.DeviceTypeHandler},
+      </if>
     </set>
     where deviceid = #{deviceid,jdbcType=INTEGER}
   </update>
@@ -224,7 +276,8 @@
       device_type = #{deviceType,jdbcType=VARCHAR},
       `value` = #{value,jdbcType=DOUBLE},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      isenable = #{isenable,jdbcType=BIT}
+      isenable = #{isenable,jdbcType=BIT},
+      subsets = #{subsets,jdbcType=VARCHAR,typeHandler=com.prc.springbootmybatisgeneator.typehandler.DeviceTypeHandler}
     where deviceid = #{deviceid,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     druid:
-      url: jdbc:mysql://192.168.157.158:3306/xuexi
+      url: jdbc:mysql://192.168.157.158:3306/xuexi?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
       username: root
       password: prc772926
       initial-size: 1
@@ -12,6 +12,14 @@ spring:
       max-active: 20
       test-on-borrow: true
       driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    converters:
+      preferred-json-mapper: gson
+  gson:
+    field-naming-policy: lower_case_with_underscores
+    long-serialization-policy: string
+    date-format: yyyy-MM-dd HH:mm:ss
+    disable-html-escaping: false
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

@@ -4,9 +4,7 @@ import com.prc.springbootmybatisgeneator.pojo.dto.Device;
 import com.prc.springbootmybatisgeneator.pojo.dto.DeviceCriteria;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface DeviceMapper {
     long countByExample(DeviceCriteria example);
 

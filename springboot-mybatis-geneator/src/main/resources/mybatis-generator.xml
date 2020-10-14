@@ -6,7 +6,10 @@
     <properties resource="application.yml"/>
 
     <!-- 指定数据库驱动的jdbc驱动jar包的位置 -->
+    <!-- mysql8 -->
     <classPathEntry location="E:/mymaven/myLocalRepository/mysql/mysql-connector-java/8.0.21/mysql-connector-java-8.0.21.jar"/>
+    <!-- mysql5 -->
+    <!-- <classPathEntry location="E:/mymaven/myLocalRepository/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar"/> -->
 
     <!-- context 是逆向工程的主要配置信息 -->
     <!-- id：名称 -->
@@ -25,6 +28,8 @@
         </plugin>
         <!-- 自动实现Serializable接口 -->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!--生成mapper.xml时覆盖原文件-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
 
         <!-- 创建class时，控制注释生成 -->
         <commentGenerator>
@@ -38,7 +43,9 @@
 		<jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
                         connectionURL="jdbc:mysql://192.168.157.158:3306/xuexi"
 			            userId="root"
-                        password="prc772926" />
+                        password="prc772926">
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
 
         <!-- 生成model的路径 -->
         <!-- targetPackage：生成的实体类所在的包 -->
@@ -68,17 +75,9 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <!--<table tableName="form_log" domainObjectName="FormLog">
-            <generatedKey column="id" sqlStatement="MySql" identity="true" />
-        </table>-->
-        <!--<table tableName="formdef_action" domainObjectName="FormdefAction">
-            <generatedKey column="id" sqlStatement="MySql" identity="true" />
-            <columnOverride column="filters" typeHandler="net.hzbox.vj.formpro.typehandler.LinkFiltersTypeHandler" jdbcType="VARCHAR"/>
-            <columnOverride column="update_rules" typeHandler="net.hzbox.vj.formpro.typehandler.FieldActionRulesTypeHandler" jdbcType="VARCHAR"/>
-            <columnOverride column="insert_rules" typeHandler="net.hzbox.vj.formpro.typehandler.FieldActionRulesTypeHandler" jdbcType="VARCHAR"/>
-        </table>-->
         <table tableName="device" domainObjectName="Device">
-            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <generatedKey column="deviceid" sqlStatement="MySql" identity="true" />
+            <columnOverride column="subsets" typeHandler="com.prc.springbootmybatisgeneator.typehandler.DeviceTypeHandler" jdbcType="VARCHAR"/>
         </table>
 	</context>
 </generatorConfiguration>

@@ -1,8 +1,15 @@
 package com.prc.springbootmybatisgeneator.pojo.dto;
 
+import com.prc.springbootmybatisgeneator.pojo.vo.DeviceVo;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+@Setter
+@Getter
 public class Device implements Serializable {
     private Integer deviceid;
 
@@ -16,66 +23,20 @@ public class Device implements Serializable {
 
     private Boolean isenable;
 
-    private static final long serialVersionUID = 1L;
+    private List<DeviceVo.Subset> subsets;
 
-    public Device(Integer deviceid, String deviceName, String deviceType, Double value, Date createTime, Boolean isenable) {
+    public Device() {
+    }
+
+    public Device(Integer deviceid, String deviceName, String deviceType, Double value, Date createTime, Boolean isenable, List<DeviceVo.Subset> subsets) {
         this.deviceid = deviceid;
         this.deviceName = deviceName;
         this.deviceType = deviceType;
         this.value = value;
         this.createTime = createTime;
         this.isenable = isenable;
+        this.subsets = subsets;
     }
 
-    public Device() {
-        super();
-    }
-
-    public Integer getDeviceid() {
-        return deviceid;
-    }
-
-    public void setDeviceid(Integer deviceid) {
-        this.deviceid = deviceid;
-    }
-
-    public String getDeviceName() {
-        return deviceName;
-    }
-
-    public void setDeviceName(String deviceName) {
-        this.deviceName = deviceName == null ? null : deviceName.trim();
-    }
-
-    public String getDeviceType() {
-        return deviceType;
-    }
-
-    public void setDeviceType(String deviceType) {
-        this.deviceType = deviceType == null ? null : deviceType.trim();
-    }
-
-    public Double getValue() {
-        return value;
-    }
-
-    public void setValue(Double value) {
-        this.value = value;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Boolean getIsenable() {
-        return isenable;
-    }
-
-    public void setIsenable(Boolean isenable) {
-        this.isenable = isenable;
-    }
+    private static final long serialVersionUID = 1L;
 }

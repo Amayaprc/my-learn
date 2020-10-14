@@ -65,19 +65,50 @@ public class DeviceCriteria {
     }
 
     protected abstract static class GeneratedCriteria {
+        protected List<Criterion> subsetsCriteria;
+
+        protected List<Criterion> allCriteria;
+
         protected List<Criterion> criteria;
 
         protected GeneratedCriteria() {
             super();
             criteria = new ArrayList<>();
+            subsetsCriteria = new ArrayList<>();
+        }
+
+        public List<Criterion> getSubsetsCriteria() {
+            return subsetsCriteria;
+        }
+
+        protected void addSubsetsCriterion(String condition, Object value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            subsetsCriteria.add(new Criterion(condition, value, "com.prc.springbootmybatisgeneator.typehandler.DeviceTypeHandler"));
+            allCriteria = null;
+        }
+
+        protected void addSubsetsCriterion(String condition, String value1, String value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            subsetsCriteria.add(new Criterion(condition, value1, value2, "com.prc.springbootmybatisgeneator.typehandler.DeviceTypeHandler"));
+            allCriteria = null;
         }
 
         public boolean isValid() {
-            return criteria.size() > 0;
+            return criteria.size() > 0
+                || subsetsCriteria.size() > 0;
         }
 
         public List<Criterion> getAllCriteria() {
-            return criteria;
+            if (allCriteria == null) {
+                allCriteria = new ArrayList<>();
+                allCriteria.addAll(criteria);
+                allCriteria.addAll(subsetsCriteria);
+            }
+            return allCriteria;
         }
 
         public List<Criterion> getCriteria() {
@@ -89,6 +120,7 @@ public class DeviceCriteria {
                 throw new RuntimeException("Value for condition cannot be null");
             }
             criteria.add(new Criterion(condition));
+            allCriteria = null;
         }
 
         protected void addCriterion(String condition, Object value, String property) {
@@ -96,6 +128,7 @@ public class DeviceCriteria {
                 throw new RuntimeException("Value for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value));
+            allCriteria = null;
         }
 
         protected void addCriterion(String condition, Object value1, Object value2, String property) {
@@ -103,6 +136,7 @@ public class DeviceCriteria {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
+            allCriteria = null;
         }
 
         public Criteria andDeviceidIsNull() {
@@ -482,6 +516,76 @@ public class DeviceCriteria {
 
         public Criteria andIsenableNotBetween(Boolean value1, Boolean value2) {
             addCriterion("isenable not between", value1, value2, "isenable");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubsetsIsNull() {
+            addCriterion("subsets is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubsetsIsNotNull() {
+            addCriterion("subsets is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubsetsEqualTo(String value) {
+            addSubsetsCriterion("subsets =", value, "subsets");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubsetsNotEqualTo(String value) {
+            addSubsetsCriterion("subsets <>", value, "subsets");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubsetsGreaterThan(String value) {
+            addSubsetsCriterion("subsets >", value, "subsets");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubsetsGreaterThanOrEqualTo(String value) {
+            addSubsetsCriterion("subsets >=", value, "subsets");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubsetsLessThan(String value) {
+            addSubsetsCriterion("subsets <", value, "subsets");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubsetsLessThanOrEqualTo(String value) {
+            addSubsetsCriterion("subsets <=", value, "subsets");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubsetsLike(String value) {
+            addSubsetsCriterion("subsets like", value, "subsets");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubsetsNotLike(String value) {
+            addSubsetsCriterion("subsets not like", value, "subsets");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubsetsIn(List<String> values) {
+            addSubsetsCriterion("subsets in", values, "subsets");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubsetsNotIn(List<String> values) {
+            addSubsetsCriterion("subsets not in", values, "subsets");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubsetsBetween(String value1, String value2) {
+            addSubsetsCriterion("subsets between", value1, value2, "subsets");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubsetsNotBetween(String value1, String value2) {
+            addSubsetsCriterion("subsets not between", value1, value2, "subsets");
             return (Criteria) this;
         }
     }
